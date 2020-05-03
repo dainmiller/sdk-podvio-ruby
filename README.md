@@ -22,7 +22,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Configure the crawler backend
+
+Create `crawler.rb` in `config/initializers`
+
+Add the following to the file, with your preferred configs
+
+```
+crawler.setup do |config|
+
+  # Define types of crawler, default all
+  config.types = :podcasts
+  
+  # This allows us to abstract the datastore so that you can store
+  # the data however you want
+  config.data_receipt = DataLoader.new.receive # method to receive data
+  
+  # Optional value, for us to store the data, so you don't have to worry
+  # about receiving the data.
+  config.gem_datastore = :sql # options: [:sql, :redis, :datomic]
+  
+end
+```
+
+
 
 ## Development
 
