@@ -5,7 +5,7 @@ require "crawlerrb/strategies/functional"
 module Crawlerrb
   class Error < StandardError; end
   
-  class CrawlerApi < FunctionalCrawlerInterface
+  class CrawlerApi
 
     class << self
       
