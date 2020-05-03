@@ -1,14 +1,18 @@
 module Strategies
   class Functional < FunctionalCrawlerInterface
   
-    def initialize sequence_for:, podcast=nil
-      if :podcasts
-        store transform unwrap extract_podcasts
-      end
-    
-      if :episodes
+    def initialize options
+      
+      if options.podcast
+        
         store transform unwrap extract_episodes podcast
+
+      else
+        
+        store transform unwrap extract_podcasts
+
       end
+      
     end
   
   end
