@@ -28,7 +28,7 @@ Create `crawler.rb` in `config/initializers`
 
 Add the following to the file, with your preferred configs
 
-```
+```ruby
 crawler.setup do |config|
 
   # Define types of crawler, default all
