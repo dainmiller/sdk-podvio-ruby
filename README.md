@@ -45,7 +45,25 @@ crawler.setup do |config|
 end
 ```
 
+2. Use the API to crawl podcasts and store the data
 
+For instance, if you have a background job that you want to start
+crawling a podcast looking for new episodes, you could use the 
+API like this:
+
+```ruby
+episodes = CrawlerApi.crawl_for(podcast: "Podcast Name Here")
+```
+
+For instance, if you have a background job that you want to start
+crawling for NEW PODCASTS, instead of new episodes of a podcast,
+you can do this:
+
+```ruby
+podcasts = CrawlerApi.crawl_for_new_podcasts
+```
+
+You can then use the `episodes` and `podcasts` variables however you want.
 
 ## Development
 

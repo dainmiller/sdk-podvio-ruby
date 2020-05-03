@@ -1,27 +1,36 @@
 require "crawlerrb/version"
-Crawlerrb.crawl { 
-  
-}
+require "crawlerrb/interfaces/functional_crawler_interface"
+require "crawlerrb/strategies/functional"
+
 module Crawlerrb
   class Error < StandardError; end
   
-  def self.crawl &block
-    klass = Class.new
-    klass.send :include, Crawler::Extract
-    klass.new.crawl &block
+  class CrawlerApi < FunctionalCrawlerInterface
+
+    class << self
+      
+      def crawl_for podcast:
+        Strategies::Functional.new(
+          sequence_for: :episodes,
+          podcast: podcast
+        )
+      end
+      
+      def self.crawl_for_new_podcasts
+        Strategies::Functional.new(
+          sequence_for: :podcasts
+        )
+      end
+    
+    end
+    
   end
   
-  def self.configure
-    yield self
-  end
-  
-  def self.set_proxy *args
-    @proxy_args = args
-  end
-  
-  def set_user_agent user_agent
-    @user_agent = user_agent
-  end
-  
-  alias_method :scrape, :crawl
 end
+
+# Create the API that others will use, by mixing in the
+# Crawlerrb::CrawlerApi module class to the CrawlerApi 
+# class. All this does is allow for a simpler API without
+# needing to prefix `Crawlerrb::`.
+class CrawlerApi ; end
+extend CrawlerApi, Crawlerrb::CrawlerApi
