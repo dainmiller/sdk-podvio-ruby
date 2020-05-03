@@ -9,19 +9,25 @@ module Crawlerrb
 
     class << self
       
-      def crawl_for podcast:
-        Strategies::Functional.new(
-          sequence_for: :episodes,
-          podcast: podcast
-        )
+      def crawl_for_new_episodes podcast:
+        functional do
+          {
+            podcast: podcast
+          }
+        end
       end
       
       def self.crawl_for_new_podcasts
-        Strategies::Functional.new(
-          sequence_for: :podcasts
-        )
+        functional do 
+          {
+            podcast: nil
+          }
+        end
       end
     
+      def functional &block
+        yield Strategies::Functional.new &block
+      end
     end
     
   end
