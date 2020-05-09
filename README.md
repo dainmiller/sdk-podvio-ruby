@@ -78,7 +78,7 @@ or for a callback registered for any new episode across all your podcasts
 
 ```ruby
 your_callback_url = "https://api.yourapp.com/new_podcast_content"
-podcasts = Crawlerrb::Api.new.subscribe_with_callback nil, your_callback_url
+podcasts = CrawlerApi::Interface.new.subscribe_with_callback nil, your_callback_url
 
 # => no body results, but data for all podcasts, comes in to your API
 ```
