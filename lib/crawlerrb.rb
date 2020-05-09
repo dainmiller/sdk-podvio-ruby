@@ -26,3 +26,5 @@ module Crawlerrb
   end
 
 end
+
+CrawlerApi = Crawlerrb
