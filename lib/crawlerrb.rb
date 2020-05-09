@@ -24,7 +24,13 @@ module Crawlerrb
 
     end
   end
-
 end
 
 CrawlerApi = Crawlerrb
+
+class CrawlerApiTransaction
+  # TODO: Implement this transaction
+  def self.start
+    yield
+  end
+end
