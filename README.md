@@ -52,7 +52,7 @@ crawling a podcast looking for new episodes, you could use the
 API like this:
 
 ```ruby
-episodes = Crawlerrb::Api.new.broadcast "Accidental Tech Podcast"
+episodes = CrawlerApi::Interface.new.broadcast "Accidental Tech Podcast"
 # => no body results, 200 header to know it started background job
 ```
 
@@ -60,7 +60,7 @@ Then if you want to subscribe for results, you can do it like this
 for immediate results
 
 ```ruby
-podcasts = Crawlerrb::Api.new.subscribe "Accidental Tech Podcasts"
+podcasts = CrawlerApi::Interface.new.subscribe "Accidental Tech Podcasts"
 # => body results contain list of episodes for podcast
 ```
 
@@ -69,7 +69,7 @@ or with a callback
 ```ruby
 your_callback_url = "https://api.yourapp.com/new_podcast_content/accidental-tech-podcast"
 new_eps_needed_for = "Accidental Tech Podcast"
-podcasts = Crawlerrb::Api.new.subscribe_with_callback new_eps_needed_for, your_callback_url
+podcasts = CrawlerApi::Interface.new.subscribe_with_callback new_eps_needed_for, your_callback_url
 
 # => no body results, but data for only that podcast, comes in to your API
 ```
