@@ -52,18 +52,36 @@ crawling a podcast looking for new episodes, you could use the
 API like this:
 
 ```ruby
-episodes = CrawlerApi.crawl_for(podcast: "Podcast Name Here")
+episodes = CrawlerApi::Interface.new.broadcast "Accidental Tech Podcast"
+# => no body results, 200 header to know it started background job
 ```
 
-For instance, if you have a background job that you want to start
-crawling for NEW PODCASTS, instead of new episodes of a podcast,
-you can do this:
+Then if you want to subscribe for results, you can do it like this
+for immediate results
 
 ```ruby
-podcasts = CrawlerApi.crawl_for_new_podcasts
+podcasts = CrawlerApi::Interface.new.subscribe "Accidental Tech Podcasts"
+# => body results contain list of episodes for podcast
 ```
 
-You can then use the `episodes` and `podcasts` variables however you want.
+or with a callback
+
+```ruby
+your_callback_url = "https://api.yourapp.com/new_podcast_content/accidental-tech-podcast"
+new_eps_needed_for = "Accidental Tech Podcast"
+podcasts = CrawlerApi::Interface.new.subscribe_with_callback new_eps_needed_for, your_callback_url
+
+# => no body results, but data for only that podcast, comes in to your API
+```
+
+or for a callback registered for any new episode across all your podcasts
+
+```ruby
+your_callback_url = "https://api.yourapp.com/new_podcast_content"
+podcasts = CrawlerApi::Interface.new.subscribe_with_callback nil, your_callback_url
+
+# => no body results, but data for all podcasts, comes in to your API
+```
 
 ## Development
 

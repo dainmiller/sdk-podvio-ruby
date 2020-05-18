@@ -4,10 +4,8 @@ require 'uri'
 module Crawlerrb
   module Clients
     module Itunes
-
        class Search
          attr_accessor :results
-
          def initialize(podcast:)
            @podcast = podcast
            execute

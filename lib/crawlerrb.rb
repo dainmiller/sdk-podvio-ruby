@@ -9,23 +9,14 @@ require "crawlerrb/clients/itunes/search"
 
 module Crawlerrb
   class Error < StandardError; end
-
-  class CrawlerApi
-
-    class << self
-
-      def crawl_for_new_episodes podcast:
-        Strategies::Functional::Episodes.for podcast: podcast
-      end
-
-      def self.crawl_for_new_podcasts
-        Strategies::Functional::Podcasts.new
-      end
-
-    end
-  end
-
 end
 
 Crawler = Crawlerrb
 Database = Crawlerrb::Database
+
+class CrawlerApiTransaction
+  # TODO: Implement this transaction
+  def self.start
+    yield
+  end
+end
