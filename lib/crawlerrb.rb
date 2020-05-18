@@ -26,3 +26,6 @@ module Crawlerrb
   end
 
 end
+
+Crawler = Crawlerrb
+Database = Crawlerrb::Database

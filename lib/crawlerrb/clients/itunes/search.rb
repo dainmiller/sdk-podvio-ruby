@@ -6,22 +6,29 @@ module Crawlerrb
     module Itunes
 
        class Search
-
          attr_accessor :results
 
          def initialize(podcast:)
-           request podcast
+           @podcast = podcast
+           execute
          end
 
-         def request podcast
-           uri = URI("https://itunes.apple.com/search?term=#{podcast}")
-           res = Net::HTTP.get(uri)
-           @results = JSON.parse(res)
-           results = @results
+         def execute
+           results
          end
 
+         def url
+           URI("https://itunes.apple.com/search?term=#{@podcast}")
+         end
+
+         def results
+           parse Net::HTTP.get url
+         end
+
+         def parse response
+           JSON.parse response
+         end
        end
-
     end
   end
 end

@@ -12,10 +12,12 @@ module Crawlerrb
         search = Crawlerrb::Clients::Itunes::Search.new(
           podcast: @podcast
         )
+
         feedUrl  = search.results.fetch('results')[0].fetch('feedUrl')
         xml      = Nokogiri::XML(Net::HTTP.get(URI(feedUrl)))
         channel  = xml.at("rss").at("channel")
         @items   = channel.xpath("//item") if channel
+
         @items   = @items.map { |e|
           {
             title: e.at('title').content,
@@ -25,6 +27,7 @@ module Crawlerrb
             guid: e.at('guid').content
           }
         }
+
         return @items
       end
 
